@@ -10,13 +10,12 @@ exports.handler = async ({httpMethod, body}) => {
         return { statusCode: 401, body: 'Unauthorized' }
     }
     try {
+
         await axios.post(response_url, {
-            body: JSON.stringify({
-                headers: {
-                    "content-type": "application/json"
-                },
-                text: `🕊 Please think twice before using @here. ${text || ''}`,
-            })
+            text: `🕊 Please think twice before using @here. ${text || ''}`,
+        },
+        {
+            headers: { "content-type": "application/json" }
         })
         return { 
             statusCode: 200 
