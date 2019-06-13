@@ -25,7 +25,7 @@ exports.handler = async ({httpMethod, body}) => {
     catch (error) {
         return {
             statusCode: 422,
-            body: `Error: ${error}`
+            body: error.message
         }
     }
 }
