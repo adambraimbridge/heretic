@@ -1,14 +1,15 @@
+const querystring = require ('querystring')
 exports.handler = async (event, context) => {
-    if (event.httpMethod !== "POST") {
-        return { statusCode: 405, body: "Method Not Allowed" }
+    if (event.httpMethod !== 'POST') {
+        return { statusCode: 405, body: 'Method Not Allowed' }
     }
     
-    console.log(event.body)
+    console.log(querystring.parse(event.body))
     
-    // const params = querystring.parse(event.body)
+    const params = querystring.parse(event.body)
     const { SLACK_TOKEN } = process.env
     if (!params.token || params.token !== SLACK_TOKEN) {
-        return { statusCode: 401, body: "Unauthorized" }
+        return { statusCode: 401, body: 'Unauthorized' }
     }
     const message = params.message || ''
     return {
