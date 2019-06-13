@@ -3,6 +3,10 @@ exports.handler = async (event, context) => {
         return { statusCode: 405, body: "Method Not Allowed" }
     }
     const params = querystring.parse(event.body)
+    const { SLACK_TOKEN } = process.env
+    if (!params.token || params.token !== SLACK_TOKEN) {
+        return { statusCode: 401, body: "Unauthorized" }
+    }
     const message = params.message || ''
     return {
         statusCode: 200,
