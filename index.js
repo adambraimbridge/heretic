@@ -12,10 +12,11 @@ exports.handler = async ({httpMethod, body}) => {
     try {
 
         await axios.post(response_url, {
+            response_type: 'in_channel',
             text: `🕊 Please think twice before using @here. ${text || ''}`,
         },
         {
-            headers: { "content-type": "application/json" }
+            headers: { 'content-type': 'application/json' }
         })
         return { 
             statusCode: 200 
