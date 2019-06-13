@@ -23,7 +23,6 @@ exports.handler = async ({httpMethod, body}) => {
     }
     catch (error) {
         console.error(error)
-        console.log({ token, text, response_url })
         return {
             statusCode: 422,
             body: error.message
