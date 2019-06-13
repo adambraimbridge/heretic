@@ -1,0 +1,24 @@
+{
+  "name": "heretic",
+  "version": "1.0.0",
+  "description": "[![Netlify Status](https://api.netlify.com/api/v1/badges/20467bc6-60a4-42dd-9183-704f825d2928/deploy-status)](https://app.netlify.com/sites/heretic/deploys)",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.19.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adambraimbridge/heretic.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adambraimbridge/heretic/issues"
+  },
+  "homepage": "https://github.com/adambraimbridge/heretic#readme"
+}

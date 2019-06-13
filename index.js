@@ -1,5 +1,5 @@
 const querystring = require ('querystring')
-const fetch = require('node-fetch')
+const axios = require('axios');
 exports.handler = async ({httpMethod, body}) => {
     if (httpMethod !== 'POST') {
         return { statusCode: 405, body: 'Method Not Allowed' }
@@ -10,13 +10,13 @@ exports.handler = async ({httpMethod, body}) => {
         return { statusCode: 401, body: 'Unauthorized' }
     }
     try {
-        const response = await fetch(SLACK_WEBHOOK_URL, {
+        const response = await axios.post(SLACK_WEBHOOK_URL, {
             body: JSON.stringify({
-            headers: {
-                "content-type": "application/json"
-            },
-            method: "POST",
-                'text': `🕊 Please think twice before using @here. ${params.text || ''}`
+                headers: {
+                    "content-type": "application/json"
+                },
+                method: "POST",
+                text: `🕊 Please think twice before using @here. ${params.text || ''}`
             })
         })
         return { 
