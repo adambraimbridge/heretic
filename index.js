@@ -10,6 +10,12 @@ exports.handler = async (event, context) => {
     }
     return {
         statusCode: 200,
-        body: `🕊 Please think twice before using @here. ${params.text || ''}`
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: `{
+            'response_type': 'in_channel',
+            'text': '🕊 Please think twice before using @here. ${params.text || ""}'
+        }`
     }
 }
