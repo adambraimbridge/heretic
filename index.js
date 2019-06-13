@@ -9,20 +9,24 @@ exports.handler = async ({httpMethod, body}) => {
     if (!params.token || params.token !== SLACK_TOKEN) {
         return { statusCode: 401, body: 'Unauthorized' }
     }
-    return fetch(process.env.SLACK_WEBHOOK_URL, {
-        headers: {
-            "content-type": "application/json"
-        },
-        method: "POST",
-        body: JSON.stringify({
-            'text': `🕊 Please think twice before using @here. ${params.text || ''}`
+    try {
+        const response = await fetch(SLACK_WEBHOOK_URL, {
+            body: JSON.stringify({
+            headers: {
+                "content-type": "application/json"
+            },
+            method: "POST",
+                'text': `🕊 Please think twice before using @here. ${params.text || ''}`
+            })
         })
-        .then(() => ({
-            statusCode: 200,
-        }))
-        .catch(error => ({
+        return { 
+            statusCode: 200 
+        }
+    }
+    catch (error) {
+        return {
             statusCode: 422,
-            body: `Oops! Something went wrong. ${error}`
-        }))
-    })
+            body: `Error: ${error}`
+        }
+    }
 }
