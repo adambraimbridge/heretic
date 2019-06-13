@@ -4,19 +4,18 @@ exports.handler = async ({httpMethod, body}) => {
     if (httpMethod !== 'POST') {
         return { statusCode: 405, body: 'Method Not Allowed' }
     }
-    const params = querystring.parse(body)
-    const { SLACK_TOKEN, SLACK_WEBHOOK_URL } = process.env
-    if (!params.token || params.token !== SLACK_TOKEN) {
+    const { token, text, response_url } = querystring.parse(body)
+    const { SLACK_TOKEN } = process.env
+    if (!token || token !== SLACK_TOKEN) {
         return { statusCode: 401, body: 'Unauthorized' }
     }
     try {
-        const response = await axios.post(SLACK_WEBHOOK_URL, {
+        await axios.post(response_url, {
             body: JSON.stringify({
                 headers: {
                     "content-type": "application/json"
                 },
-                method: "POST",
-                text: `🕊 Please think twice before using @here. ${params.text || ''}`
+                text: `🕊 Please think twice before using @here. ${text || ''}`,
             })
         })
         return { 
